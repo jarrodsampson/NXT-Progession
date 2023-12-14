@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// run npx prisma generate
+// run npx prisma db push 
+
+// to get this replicated locally
+// run brew services stop mongodb-community@7.0
+// run mongod --port 27017 --dbpath /opt/homebrew/var/mongodb/ --replSet rs0 --bind_ip localhost,HomeHost
+
+// new terminal
+// run mongosh
+// run rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'localhost:27017'}]});
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// sqlite
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Superstars {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  image           String
+  link            String
+  agent           String
+  bio_description Json
+  bio_image       String
+  fullBodyImage   String
+  hometown        String
+  signature       String
+  highlights      String
+  socialLinks     Json
+  height          String
+  weight          String
+  videos          Json
+}
