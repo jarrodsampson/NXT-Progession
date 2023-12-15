@@ -18,25 +18,46 @@ const searchItems = async (req: NextRequest) => {
   try {
     let list: any = [];
     let total: Number = 0;
-    let where = {
-      name: {
-        contains: `${search}`,
-      },
-    };
 
     if (search) {
       list = await prisma.superstars.findMany({
         skip: Number(offset) || DEFAULT_OFFSET,
         take: Number(limit) || DEFAULT_LIMIT,
-        where,
+        where: {
+          name: {
+            contains: `${search}`,
+            mode: "insensitive",
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+        orderBy: {
+          name: "asc",
+        },
       });
       total = await prisma.superstars.count({
-        where,
+        where: {
+          name: {
+            contains: `${search}`,
+            mode: "insensitive",
+          },
+        },
       });
     } else {
       list = await prisma.superstars.findMany({
         skip: Number(offset) || DEFAULT_OFFSET,
         take: Number(limit) || DEFAULT_LIMIT,
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+        orderBy: {
+          name: "asc",
+        },
       });
       total = await prisma.superstars.count();
     }
