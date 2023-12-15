@@ -1,82 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { ApiService } from "./services/ApiService";
-import { Superstar } from "./types/interfaces";
-import InfiniteScroll from "react-infinite-scroll-component";
+import SuperstarList from "./components/superstarList";
 
 const Home: React.FC = () => {
-  const [superstarData, setSuperstarData] = useState<Superstar[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await ApiService.fetchSuperstars(12, 0);
-        console.log(data);
-        setSuperstarData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const fetchMoreData = async () => {
-    try {
-      const newData = await ApiService.fetchSuperstars(10, superstarData.length);
-      if (newData.length === 0) {
-        setHasMore(false);
-      } else {
-        setSuperstarData((prevData) =>
-          Array.isArray(newData) ? [...prevData, ...newData] : prevData
-        );
-      }
-    } catch (error) {
-      console.error("Error fetching more superstar data:", error);
-      setHasMore(false);
-    }
-  };
-
   return (
-    <main className="flex flex-col items-center justify-between p-24">
-      <InfiniteScroll
-        dataLength={superstarData.length}
-        style={{
-          overflow: "hidden",
-        }}
-        next={fetchMoreData}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-      >
-        <div className="flex flex-wrap -m-4">
-          {superstarData.map((superstar) => (
-            <div key={superstar.id} className="relative p-4 w-1/4">
-              <div className="group">
-                <Image
-                  className="w-full h-76 object-cover object-center mb-4 rounded-lg shadow-md
-          transition-transform transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-[-5deg]"
-                  src={superstar?.image || "/image"}
-                  alt={superstar?.name || "Superstar"}
-                  width={400} // Set the width as per your design
-                  height={300} // Set the height as per your design
-                />
-
-                <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-6 rounded-lg">
-                  <div className="w-full bg-black bg-opacity-50 rounded-lg p-4">
-                    <h2 className="text-l font-bold mb-2 text-white text-center">
-                      {superstar.name}
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </InfiniteScroll>
-    </main>
+    <div className="flex flex-col items-center justify-between p-24">
+      <SuperstarList />
+    </div>
   );
 };
 
