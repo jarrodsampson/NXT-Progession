@@ -16,6 +16,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ isLoading }) => {
     <>
       {visible && (
         <div
+          data-cy="loading-spinner"
           className={`fixed top-0 left-0 bottom-0 right-0 flex items-center 
         justify-center opacity-90 transition-opacity duration-500 z-50`}
         >

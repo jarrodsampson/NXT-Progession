@@ -1,10 +1,10 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-800 text-white p-8">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="footer bg-gray-900 text-white p-8">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Section 1: Company Info */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Company Info</h3>
@@ -49,13 +49,6 @@ const Footer = () => {
               <a href="#">Contact</a>
             </li>
           </ul>
-        </div>
-
-        {/* Section 4: Subscription Form */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Subscribe to Our Newsletter</h3>
-          {/* Include your subscription form here */}
-          <form>{/* Add your form fields, e.g., email input, subscribe button, etc. */}</form>
         </div>
       </div>
     </footer>

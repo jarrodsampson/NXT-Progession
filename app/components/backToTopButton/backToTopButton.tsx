@@ -32,6 +32,7 @@ const BackToTopButton: React.FC<BackToTopButtonProps> = ({ scrollThreshold }) =>
   return (
     isVisible && (
       <button
+        data-cy="back-to-top"
         className="fixed bottom-4 right-4 bg-gray-300 hover:bg-gray-400 text-gray-800
     font-bold w-10 h-10 flex items-center justify-center rounded-full focus:outline-none focus:shadow-outline z-50"
         onClick={scrollToTop}
