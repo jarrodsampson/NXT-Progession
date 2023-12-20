@@ -1,7 +1,7 @@
 describe("App spec", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/superstars");
-    cy.scrollTo(0, 0);
+    cy.window().scrollTo(0, 0);
   });
 
   it("should navigate to the correct Superstars route", () => {
@@ -25,7 +25,7 @@ describe("App spec", () => {
   });
 
   it("should have back to top button", () => {
-    cy.scrollTo(0, 400);
+    cy.window().scrollTo(0, 400);
     cy.get("[data-cy=back-to-top]").should("be.visible");
   });
 
