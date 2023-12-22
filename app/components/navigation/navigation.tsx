@@ -14,8 +14,10 @@ const Navigation: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-      setIsScrollingUp(prevScrollPos > currentScrollPos);
-      setPrevScrollPos(currentScrollPos);
+      if (currentScrollPos > 200) {
+        setIsScrollingUp(prevScrollPos > currentScrollPos);
+        setPrevScrollPos(currentScrollPos);
+      }
     };
 
     if (typeof window !== "undefined") {
@@ -60,15 +62,13 @@ const Navigation: React.FC = () => {
               Superstars
             </Link>
             <Link
-              href="#"
-              className={`text-white hover:text-gray-300 ${
-                pathname === "/services" ? "active" : ""
-              }`}
+              href="/offers"
+              className={`text-white hover:text-gray-300 ${pathname === "/offers" ? "active" : ""}`}
             >
               Services
             </Link>
             <Link
-              href="#"
+              href="/contact"
               className={`text-white hover:text-gray-300 ${
                 pathname === "/contact" ? "active" : ""
               }`}

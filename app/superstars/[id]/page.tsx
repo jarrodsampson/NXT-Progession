@@ -33,6 +33,10 @@ const Page = ({ params }: { params: { id: string } }) => {
     fetchData();
   }, [params.id]);
 
+  useEffect(() => {
+    document.title = `${superstar?.name || ""} - ${process.env.NEXT_PUBLIC_APP_NAME}`;
+  }, [superstar]);
+
   return (
     <>
       <LoadingSpinner isLoading={isLoading} />
