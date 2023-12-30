@@ -39,6 +39,10 @@ body {
   @apply font-open-sans;
 }
 
+.alternating-container .flex:nth-child(2n + 1) {
+  flex-direction: row-reverse;
+}
+
 .footer {
   @apply font-open-sans;
 }

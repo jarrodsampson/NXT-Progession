@@ -34,3 +34,14 @@ export interface DataReturn {
   list: Superstar[];
   total: number;
 }
+
+export interface AutocompleteProps {
+  threshold: number;
+  maxSuggestions: number;
+}
+
+export interface DropdownProps {
+  items: string[];
+  // eslint-disable-next-line no-unused-vars
+  handleSuperstarTypeOption: (selectedDropDownItem: string) => void;
+}

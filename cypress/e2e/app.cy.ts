@@ -29,7 +29,7 @@ describe("App spec", () => {
   });
 
   it("should have correct footer navigation links", () => {
-    const expectedLinks = ["Home", "About", "Services", "Contact"];
+    const expectedLinks = ["Privacy Policy", "Terms and Conditions", "Services", "Contact"];
 
     expectedLinks.forEach((link) => {
       cy.get("footer .list-none").contains(link);

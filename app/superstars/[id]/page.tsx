@@ -19,7 +19,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     const fetchData = async () => {
       try {
         const data = await ApiService.fetchSuperstar(params.id);
-        console.log(data);
+        // console.log(data);
         setSuperstar(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -49,7 +49,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           autoPlayInterval={6000}
           responsive={{
             0: {
-              items: 1,
+              items: 4,
             },
             1024: {
               items: 5,
@@ -61,10 +61,11 @@ const Page = ({ params }: { params: { id: string } }) => {
               <a href={link} target="_blank">
                 <Image
                   className="w-full h-76 object-cover object-center mb-4 rounded-lg shadow-md"
-                  src={thumbnail || "/image"}
+                  src={thumbnail}
                   alt={name}
                   width={200}
                   height={100}
+                  priority={true}
                 />
                 <p className="text-gray-500 py-2 absolute top-0 right-0 bg-black bg-opacity-70 text-white px-2">
                   {duration}
@@ -81,7 +82,9 @@ const Page = ({ params }: { params: { id: string } }) => {
           <Image
             className="w-full h-76 object-cover object-center mb-4 rounded-lg shadow-md
           transition-transform transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-[-5deg]"
-            src={superstar?.bio_image || "/image"}
+            src={superstar?.bio_image || "/placeholder.png"}
+            placeholder="blur"
+            blurDataURL="/placeholder.png"
             alt={`Superstar ${superstar?.name}`}
             width={800}
             height={500}

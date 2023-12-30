@@ -37,10 +37,10 @@ const Footer: React.FC = () => {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="list-none">
             <li>
-              <a href="#">Home</a>
+              <a href="/privacy-policy">Privacy Policy</a>
             </li>
             <li>
-              <a href="#">About</a>
+              <a href="/terms-and-conditions">Terms and Conditions</a>
             </li>
             <li>
               <a href="#">Services</a>

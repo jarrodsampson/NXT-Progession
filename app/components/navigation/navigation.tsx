@@ -68,6 +68,18 @@ const Navigation: React.FC = () => {
               Services
             </Link>
             <Link
+              href="/about"
+              className={`text-white hover:text-gray-300 ${pathname === "/about" ? "active" : ""}`}
+            >
+              About
+            </Link>
+            <Link
+              href="/faqs"
+              className={`text-white hover:text-gray-300 ${pathname === "/faqs" ? "active" : ""}`}
+            >
+              FAQs
+            </Link>
+            <Link
               href="/contact"
               className={`text-white hover:text-gray-300 ${
                 pathname === "/contact" ? "active" : ""

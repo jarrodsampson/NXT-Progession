@@ -8,7 +8,7 @@ import { Superstar } from "../../types/interfaces";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadingSpinner from "../loadingSpinner/loadingSpinner";
 
-const SuperstarList: React.FC = () => {
+const SuperstarList: React.FC<{ selectedOption: string }> = ({ selectedOption }) => {
   const [superstarData, setSuperstarData] = useState<Superstar[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -16,9 +16,11 @@ const SuperstarList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await ApiService.fetchSuperstars(24, 0);
-        console.log(data);
+        setIsLoading(true);
+        const data = await ApiService.fetchSuperstars(24, 0, selectedOption);
+        // console.log(data);
         setSuperstarData(data);
+        setHasMore(true);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -29,12 +31,12 @@ const SuperstarList: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [selectedOption]);
 
   const fetchMoreData = async () => {
     setIsLoading(true);
     try {
-      const newData = await ApiService.fetchSuperstars(10, superstarData.length);
+      const newData = await ApiService.fetchSuperstars(10, superstarData.length, selectedOption);
       if (newData.length === 0) {
         setHasMore(false);
       } else {
