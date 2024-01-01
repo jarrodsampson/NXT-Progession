@@ -4,7 +4,7 @@ import SuperstarList from "./superstarList";
 describe("<SuperstarList />", () => {
   beforeEach(() => {
     cy.intercept("GET", "/api/superstars*", { fixture: "superstars.json" }).as("fetchSuperstars");
-    cy.mount(<SuperstarList />);
+    cy.mount(<SuperstarList selectedOption="NXT" />);
     cy.wait("@fetchSuperstars");
   });
 
