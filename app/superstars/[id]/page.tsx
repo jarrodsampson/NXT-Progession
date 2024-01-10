@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { ApiService } from "../../services/ApiService";
 import { Superstar } from "../../types/interfaces";
 import LoadingSpinner from "../../components/loadingSpinner/loadingSpinner";
@@ -11,7 +10,6 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
 const Page = ({ params }: { params: { id: string } }) => {
-  const router = useRouter();
   const [superstar, setSuperstar] = useState<Superstar | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -34,6 +32,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = `${superstar?.name || ""} - ${process.env.NEXT_PUBLIC_APP_NAME}`;
   }, [superstar]);
 
@@ -44,6 +43,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         <AliceCarousel
           mouseTracking
           disableDotsControls
+          disableButtonsControls
           autoPlay
           infinite
           autoPlayInterval={6000}
@@ -74,11 +74,8 @@ const Page = ({ params }: { params: { id: string } }) => {
             </div>
           ))}
         />
-        <button type="button" onClick={() => router.back()}>
-          Click here to go back
-        </button>
         <div className="w-full">
-          <h1>{superstar?.name}</h1>
+          <h1 className="text-4xl my-10">{superstar?.name}</h1>
           <Image
             className="w-full h-76 object-cover object-center mb-4 rounded-lg shadow-md
           transition-transform transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-[-5deg]"

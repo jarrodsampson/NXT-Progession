@@ -13,15 +13,17 @@ const Navigation: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+      const currentScrollPos = window.scrollY || document.documentElement.scrollTop;
       if (currentScrollPos > 200) {
         setIsScrollingUp(prevScrollPos > currentScrollPos);
         setPrevScrollPos(currentScrollPos);
+      } else {
+        setIsScrollingUp(true);
       }
     };
 
     if (typeof window !== "undefined") {
-      setPrevScrollPos(window.pageYOffset || document.documentElement.scrollTop);
+      setPrevScrollPos(window.scrollY || document.documentElement.scrollTop);
       window.addEventListener("scroll", handleScroll);
 
       // Remove the event listener when the component is unmounted

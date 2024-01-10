@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import Accordion from "../components/accordion/Accordion";
 import { faqData } from "../utils/data";
 
 const Faqs: React.FC = () => {
@@ -30,12 +30,6 @@ const Faqs: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const toggleAccordion = (index: any) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
-  };
 
   return (
     <div className="relative mb-[-3em]">
@@ -72,25 +66,7 @@ const Faqs: React.FC = () => {
 
         <div className="container text-black mx-auto my-16 w-3/4">
           {faqData.map((item, index) => (
-            <div key={index} className="mb-6">
-              {/* Question */}
-              <div
-                className="flex justify-between cursor-pointer items-center"
-                onClick={() => toggleAccordion(index)}
-              >
-                <h2 className="text-xl font-semibold mb-2">{item.question}</h2>
-                {activeIndex === index ? <FaChevronUp /> : <FaChevronDown />}
-              </div>
-
-              {/* Answer */}
-              <div
-                className={`mt-2 overflow-hidden transition-max-height duration-300 ${
-                  activeIndex === index ? "max-h-96" : "max-h-0"
-                }`}
-              >
-                <p>{item.answer}</p>
-              </div>
-            </div>
+            <Accordion key={index} question={item.question} answer={item.answer} />
           ))}
         </div>
         <div className="text-center my-20 text-black">
